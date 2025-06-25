@@ -44,13 +44,13 @@ class PlayListServiceTestShould : BaseUnitTest() {
         assert(result?.message == "Network Error")
     }
 
-    private fun failureMockService(): PlayListService {
+    private suspend fun failureMockService(): PlayListService {
         whenever(api.getPlayList()).thenThrow(exception)
         val service = PlayListService(api)
         return service
     }
 
-    private fun SuccessMockservice(): PlayListService {
+    private suspend fun SuccessMockservice(): PlayListService {
         whenever(api.getPlayList()).thenReturn(playList)
         val service = PlayListService(api)
         return service
