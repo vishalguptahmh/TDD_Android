@@ -70,9 +70,9 @@ fun Greeting(name: String, modifier: Modifier = Modifier, viewModel: MainActivit
 fun GreetingPreview() {
     LearnTDDTheme {
         Greeting("Android", viewModel = MainActivityViewModel(PlayListRepository(PlayListService(object : PlayListApi {
-            override suspend fun getPlayList(): List<PlayList> {
+            override suspend fun getPlayList(): List<PlayListRaw> {
                 return emptyList() // Mocked data for preview
             }
-        }))))
+        }), mapper = PlayListMapper())))
     }
 }

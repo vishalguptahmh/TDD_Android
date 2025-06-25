@@ -11,7 +11,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
-class PlayListFeatureTest {
+class PlayListFeatureTest : BaseUITest(){
     @get:Rule
     val composeTestRule = createAndroidComposeRule<MainActivity>()
 
@@ -39,6 +39,13 @@ class PlayListFeatureTest {
     @Test
     fun DisplayLoaderWhileFetchingPlayList() {
         composeTestRule.onNodeWithTag("Loading").assertIsDisplayed()
+
+    }
+
+
+    @Test
+    fun displayRockImagesForRockListItems() {
+
 
     }
 }

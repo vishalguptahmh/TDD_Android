@@ -1,11 +1,7 @@
 package com.vishalgupta.learntdd.di
 
-import android.app.Activity
-import androidx.activity.ComponentActivity
-import com.vishalgupta.learntdd.MainActivityViewModel
 import com.vishalgupta.learntdd.PlayListApi
-import com.vishalgupta.learntdd.PlayListRepository
-import com.vishalgupta.learntdd.PlayListService
+import com.vishalgupta.learntdd.PlayListMapper
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -13,7 +9,6 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import javax.inject.Singleton
 
 /**
  *  Created by vishal.gupta on 25/06/25
@@ -48,5 +43,10 @@ class PlayListModule {
             .build()
 
        return retrofit
+    }
+
+    @Provides
+    fun proideMapper(): PlayListMapper{
+        return PlayListMapper()
     }
 }

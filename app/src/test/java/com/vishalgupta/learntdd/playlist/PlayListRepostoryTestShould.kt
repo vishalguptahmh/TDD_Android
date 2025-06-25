@@ -1,5 +1,6 @@
 package com.vishalgupta.learntdd.playlist
 
+import com.vishalgupta.learntdd.PlayListMapper
 import com.vishalgupta.learntdd.PlayListRepository
 import com.vishalgupta.learntdd.PlayListService
 import com.vishalgupta.learntdd.utils.BaseUnitTest
@@ -19,18 +20,20 @@ import kotlin.test.assertEquals
 class PlayListRepostoryTestShould : BaseUnitTest() {
     val service: PlayListService = mock()
     val playlist = mock<List<com.vishalgupta.learntdd.PlayList>>()
+    val playListRaw = mock<List<com.vishalgupta.learntdd.PlayListRaw>>()
     val exception = RuntimeException("Network Error")
+    private val mapper: PlayListMapper = mock()
 
     @Test
     fun getPlayListFromService() = runTest {
-        val repository = PlayListRepository(service)
+        val repository = PlayListRepository(service, mapper)
         repository.getPlayList()
         verify(service, times(1)).fetchPlayList()
     }
 
     @Test
     fun emitPlayListFromService(): Unit = runTest {
-        val repository = playListRepository()
+        val repository = playListRepositorySuccess()
         assertEquals(playlist, repository.getPlayList().first().getOrNull())
     }
 
@@ -41,20 +44,26 @@ class PlayListRepostoryTestShould : BaseUnitTest() {
                 emit(Result.failure(exception))
             }
         )
-        val repository = PlayListRepository(service)
+        val repository = PlayListRepository(service, mapper)
         val result = repository.getPlayList().first { it.isFailure }
 
         assertEquals(result.exceptionOrNull(), exception)
         assertEquals(result.exceptionOrNull()?.message, "Network Error")
     }
-}
 
-private fun PlayListRepostoryTestShould.playListRepository(): PlayListRepository {
-    whenever(service.fetchPlayList()).thenReturn(
-        flow {
-            emit(Result.success(playlist))
-        }
-    )
-    val repository = PlayListRepository(service)
-    return repository
+    @Test
+    fun delegateBusinessLogicToMapper() = runTest {
+        val repository = playListRepositorySuccess()
+        repository.getPlayList().first()
+        verify(mapper, times(1)).invoke(playListRaw)
+    }
+
+    fun playListRepositorySuccess(): PlayListRepository {
+        whenever(service.fetchPlayList()).thenReturn(
+            flow { emit(Result.success(playListRaw)) }
+        )
+        whenever(mapper.invoke(playListRaw)).thenReturn(playlist)
+        val repository = PlayListRepository(service, mapper)
+        return repository
+    }
 }

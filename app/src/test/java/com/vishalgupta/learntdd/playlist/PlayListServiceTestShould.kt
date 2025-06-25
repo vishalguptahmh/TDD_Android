@@ -1,7 +1,7 @@
 package com.vishalgupta.learntdd.playlist
 
-import com.vishalgupta.learntdd.PlayList
 import com.vishalgupta.learntdd.PlayListApi
+import com.vishalgupta.learntdd.PlayListRaw
 import com.vishalgupta.learntdd.PlayListService
 import com.vishalgupta.learntdd.utils.BaseUnitTest
 import kotlinx.coroutines.flow.first
@@ -17,7 +17,7 @@ import kotlin.test.assertEquals
  *  Created by vishal.gupta on 24/06/25
  */
 class PlayListServiceTestShould : BaseUnitTest() {
-    val playList = mock<List<PlayList>>()
+    val playList = mock<List<PlayListRaw>>()
     val api: PlayListApi = mock()
     val exceptionString = "Network Error"
     val exception = RuntimeException(exceptionString)

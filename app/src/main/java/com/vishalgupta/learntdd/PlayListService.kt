@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
 class PlayListService @Inject constructor(val api: PlayListApi) {
-    fun fetchPlayList(): Flow<Result<List<PlayList>>> {
+    fun fetchPlayList(): Flow<Result<List<PlayListRaw>>> {
         Log.d("PlayListService", "fetchPlayList: ")
         return flow {
             emit(Result.success(api.getPlayList()))

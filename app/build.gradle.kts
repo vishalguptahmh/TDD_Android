@@ -99,4 +99,7 @@ dependencies {
     implementation(libs.hilt.android)
     kapt(libs.hilt.compiler)
 
+    // idleResource for UI test cases , waiting for get response from api
+    androidTestImplementation (libs.okhttp3.idling.resource)
+
 }
