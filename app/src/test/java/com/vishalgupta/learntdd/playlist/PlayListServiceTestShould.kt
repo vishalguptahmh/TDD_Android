@@ -1,8 +1,8 @@
 package com.vishalgupta.learntdd.playlist
 
-import com.vishalgupta.learntdd.PlayListApi
-import com.vishalgupta.learntdd.PlayListRaw
-import com.vishalgupta.learntdd.PlayListService
+import com.vishalgupta.learntdd.core.AppApi
+import com.vishalgupta.learntdd.core.PlayListRaw
+import com.vishalgupta.learntdd.playList.PlayListService
 import com.vishalgupta.learntdd.utils.BaseUnitTest
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.runTest
@@ -18,9 +18,7 @@ import kotlin.test.assertEquals
  */
 class PlayListServiceTestShould : BaseUnitTest() {
     val playList = mock<List<PlayListRaw>>()
-    val api: PlayListApi = mock()
-    val exceptionString = "Network Error"
-    val exception = RuntimeException(exceptionString)
+    val api: AppApi = mock()
 
     @Test
     fun getListFromApi() = runTest {

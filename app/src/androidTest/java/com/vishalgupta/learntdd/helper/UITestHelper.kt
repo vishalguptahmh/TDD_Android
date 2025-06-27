@@ -1,4 +1,4 @@
-package com.vishalgupta.learntdd
+package com.vishalgupta.learntdd.helper
 
 import androidx.test.espresso.IdlingResource
 import com.jakewharton.espresso.OkHttp3IdlingResource

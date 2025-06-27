@@ -1,8 +1,9 @@
 package com.vishalgupta.learntdd.playlist
 
 import com.vishalgupta.learntdd.MainActivityViewModel
-import com.vishalgupta.learntdd.PlayList
-import com.vishalgupta.learntdd.PlayListRepository
+import com.vishalgupta.learntdd.playList.PlayList
+import com.vishalgupta.learntdd.playList.PlayListRepository
+import com.vishalgupta.learntdd.playListDetail.PlayListDetailUsecase
 import com.vishalgupta.learntdd.utils.BaseUnitTest
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.first
@@ -22,9 +23,9 @@ import kotlin.test.assertEquals
  */
 class MainActivityViewModelTestShould : BaseUnitTest() {
     val repository: PlayListRepository = mock()
+    val playListDetailUsecase: PlayListDetailUsecase = mock()
     val playlist = mock<List<PlayList>>()
     val expectedResult = Result.success(playlist)
-    val exception = RuntimeException("Network Error")
 
     @Test
     fun getPlayListFromRepository(): Unit = runTest {
@@ -92,7 +93,7 @@ class MainActivityViewModelTestShould : BaseUnitTest() {
             }
             emit(expectedResult)
         })
-        return MainActivityViewModel(repository)
+        return MainActivityViewModel(repository,playListDetailUsecase)
     }
 
     private suspend fun viewModelFailure(delayNeeded: Boolean = false): MainActivityViewModel {
@@ -102,6 +103,6 @@ class MainActivityViewModelTestShould : BaseUnitTest() {
             }
             emit(Result.failure(exception))
         })
-        return MainActivityViewModel(repository)
+        return MainActivityViewModel(repository,playListDetailUsecase)
     }
 }

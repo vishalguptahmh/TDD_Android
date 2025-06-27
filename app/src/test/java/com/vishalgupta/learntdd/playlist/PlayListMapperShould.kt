@@ -1,7 +1,7 @@
 package com.vishalgupta.learntdd.playlist
 
-import com.vishalgupta.learntdd.PlayListMapper
-import com.vishalgupta.learntdd.PlayListRaw
+import com.vishalgupta.learntdd.playList.PlayListMapper
+import com.vishalgupta.learntdd.core.PlayListRaw
 import com.vishalgupta.learntdd.utils.BaseUnitTest
 import kotlinx.coroutines.test.runTest
 import org.junit.Test
@@ -12,7 +12,7 @@ import kotlin.test.assertEquals
  */
 class PlayListMapperShould : BaseUnitTest() {
 
-    val playListRaw : PlayListRaw = PlayListRaw(1, "Test Playlist", "Category", 12345)
+    val playListRaw : PlayListRaw = PlayListRaw("id1", "Test Playlist", "Category", 12345)
     val mapper = PlayListMapper()
     val playlists  = mapper(listOf(playListRaw))
     val playlist = playlists[0]

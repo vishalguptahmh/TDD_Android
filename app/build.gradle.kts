@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.hilt)
+    alias(libs.plugins.safeagrs)
     kotlin("kapt")
 }
 
@@ -51,6 +52,7 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+//    implementation(libs.androidx.navigation.compose.jvmstubs)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -62,44 +64,47 @@ dependencies {
 
     testImplementation(libs.unittest.mockito.inline)
     testImplementation(libs.unittest.mockito)
-    implementation (libs.kotlinx.coroutines.android)
-    implementation (libs.kotlinx.coroutines.core)
+    implementation(libs.kotlinx.coroutines.android)
+    implementation(libs.kotlinx.coroutines.core)
     testImplementation(libs.kotlinx.coroutines.test)
 
-    implementation (libs.kotlin.stdlib)
+    implementation(libs.kotlin.stdlib)
 
 
-    implementation (libs.androidx.appcompat)
+    implementation(libs.androidx.appcompat)
 
-    implementation (libs.androidx.constraintlayout)
+    implementation(libs.androidx.constraintlayout)
 
-    implementation (libs.androidx.lifecycle.livedata.ktx)
+    implementation(libs.androidx.lifecycle.livedata.ktx)
 
-    implementation (libs.androidx.lifecycle.viewmodel.ktx)
+    implementation(libs.androidx.lifecycle.viewmodel.ktx)
 
-    implementation (libs.retrofit)
+    implementation(libs.retrofit)
     implementation(libs.logging.interceptor)
 
-    implementation (libs.converter.gson)
-    implementation (libs.androidx.legacy.support.v4)
-    implementation (libs.androidx.recyclerview)
-    implementation (libs.okhttp3.idling.resource)
+    implementation(libs.converter.gson)
+    implementation(libs.androidx.legacy.support.v4)
+    implementation(libs.androidx.recyclerview)
+    implementation(libs.okhttp3.idling.resource)
 
 
-    testImplementation (libs.androidx.core.testing)
+    testImplementation(libs.androidx.core.testing)
 
-    androidTestImplementation (libs.okhttp3.idling.resource)
-    androidTestImplementation (libs.androidx.runner)
-    androidTestImplementation("com.adevinta.android:barista:4.2.0"){
+    androidTestImplementation(libs.okhttp3.idling.resource)
+    androidTestImplementation(libs.androidx.runner)
+    androidTestImplementation("com.adevinta.android:barista:4.2.0") {
         exclude(group = "org.jetbrains.kotlin")
     }
-
-
+    // navigation fragment
+    implementation(libs.androidx.navigation.fragment.ktx)
+    //naviagation UI
+    implementation(libs.androidx.navigation.ui.ktx)
+//    implementation(libs.androidx.ui)
     //HILT
     implementation(libs.hilt.android)
     kapt(libs.hilt.compiler)
-
     // idleResource for UI test cases , waiting for get response from api
-    androidTestImplementation (libs.okhttp3.idling.resource)
+    androidTestImplementation(libs.okhttp3.idling.resource)
 
+    implementation(libs.androidx.navigation.compose)
 }

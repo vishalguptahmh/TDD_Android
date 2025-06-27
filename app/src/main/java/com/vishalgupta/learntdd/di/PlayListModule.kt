@@ -1,7 +1,8 @@
 package com.vishalgupta.learntdd.di
 
-import com.vishalgupta.learntdd.PlayListApi
-import com.vishalgupta.learntdd.PlayListMapper
+import com.vishalgupta.learntdd.core.AppApi
+import com.vishalgupta.learntdd.playList.PlayListMapper
+import com.vishalgupta.learntdd.playListDetail.PlayListDetailMapper
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -25,7 +26,7 @@ class PlayListModule {
 
 
     @Provides
-    fun playListApi(retrofit: Retrofit): PlayListApi = retrofit.create(PlayListApi::class.java)
+    fun playListApi(retrofit: Retrofit): AppApi = retrofit.create(AppApi::class.java)
 
     @Provides
     fun retrofit(): Retrofit {
@@ -48,5 +49,10 @@ class PlayListModule {
     @Provides
     fun proideMapper(): PlayListMapper{
         return PlayListMapper()
+    }
+
+    @Provides
+    fun provideDetailMapper(): PlayListDetailMapper{
+        return PlayListDetailMapper()
     }
 }

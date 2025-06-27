@@ -1,7 +1,11 @@
-package com.vishalgupta.learntdd
+package com.vishalgupta.learntdd.playList
 
 import android.util.Log
+import com.vishalgupta.learntdd.core.playlistDetail.PlayListDetailRaw
+import com.vishalgupta.learntdd.playList.PlayListService
+import com.vishalgupta.learntdd.playListDetail.PlayListDetail
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
@@ -21,5 +25,9 @@ class PlayListRepository @Inject constructor(private val service: PlayListServic
                     Result.failure(it.exceptionOrNull() ?: Exception("Unknown error"))
                 }
             }
+    }
+    fun getPlayListDetail(id: String): Flow<Result<PlayListDetailRaw>> {
+        Log.d("PlayListRepository", "getPlayList: ")
+        return service.fetchPlayListDetail(id)
     }
 }

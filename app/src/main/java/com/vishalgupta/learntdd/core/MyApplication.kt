@@ -1,4 +1,4 @@
-package com.vishalgupta.learntdd
+package com.vishalgupta.learntdd.core
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp
